@@ -8,9 +8,17 @@ const gallery = document.querySelector(".gallery");
 const markup = galleryItems.reduce(
   (acc, { preview, original, description }) =>
     acc +
-    `<a class="gallery__item" href="${original}">
-  <img class="gallery__image" src="${preview}" alt="${description}" />
-</a>`,
+    `<div class="gallery__item">
+  <a class="gallery__link" href="${original}">
+    <img
+      class="gallery__image"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
+    />
+  </a>
+  </div>
+`,
   ""
 );
 
@@ -18,8 +26,12 @@ gallery.insertAdjacentHTML("beforeend", markup);
 
 const galleryItem = document.querySelector(".gallery__item");
 console.log(galleryItem);
-// const galleryImage = document.querySelector("gallery__image");
-// galleryItem.addEventListener("click", onClick);
-// function onClick(evt) {
-//   galleryImage.src = "${original}";
-// }
+const galleryImage = document.querySelector("gallery__image");
+gallery.addEventListener("click", onClick);
+
+function onClick(evt) {
+  if (!evt.target.classList.contains(".gallery__image")) {
+    return;
+  }
+  console.log(evt.target);
+}
