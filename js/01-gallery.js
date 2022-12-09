@@ -24,14 +24,16 @@ const markup = galleryItems.reduce(
 
 gallery.insertAdjacentHTML("beforeend", markup);
 
-const galleryItem = document.querySelector(".gallery__item");
-console.log(galleryItem);
-const galleryImage = document.querySelector("gallery__image");
 gallery.addEventListener("click", onClick);
 
-function onClick(evt) {
-  if (!evt.target.classList.contains(".gallery__image")) {
+function onClick(event) {
+  console.log(event.target);
+  event.preventDefault();
+  if (!event.target.classList.contains("gallery__image")) {
     return;
   }
-  console.log(evt.target);
+  const instance = basicLightbox.create(
+    `<div class="modal"><img src="${event.target.dataset.source}" width="800" heigth = "600"></div>`
+  );
+  instance.show();
 }
