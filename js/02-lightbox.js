@@ -1,4 +1,5 @@
 import { galleryItems } from "./gallery-items.js";
+
 // Change code below this line
 
 console.log(galleryItems);
@@ -19,16 +20,5 @@ const markup = galleryItems.reduce(
 
 gallery.insertAdjacentHTML("beforeend", markup);
 
-gallery.addEventListener("click", onClick);
-
-function onClick(event) {
-  console.log(event.target);
-  event.preventDefault();
-  if (!event.target.classList.contains("gallery__image")) {
-    return;
-  }
-  const instance = basicLightbox.create(
-    `<div class="modal"><img src="${event.target.dataset.source}" width="800" heigth = "600"></div>`
-  );
-  instance.show();
-}
+let galler = new SimpleLightbox(".gallery a");
+galler.on("show.simplelightbox");
