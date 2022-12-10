@@ -3,7 +3,7 @@ import { galleryItems } from "./gallery-items.js";
 
 console.log(galleryItems);
 
-const gallery = document.querySelector(".gallery");
+const galleryBox = document.querySelector(".gallery");
 
 const markup = galleryItems.reduce(
   (acc, { preview, original, description }) =>
@@ -22,9 +22,9 @@ const markup = galleryItems.reduce(
   ""
 );
 
-gallery.insertAdjacentHTML("beforeend", markup);
+galleryBox.insertAdjacentHTML("beforeend", markup);
 
-gallery.addEventListener("click", onClick);
+galleryBox.addEventListener("click", onClick);
 
 function onClick(event) {
   console.log(event.target);
@@ -36,4 +36,10 @@ function onClick(event) {
     `<div class="modal"><img src="${event.target.dataset.source}" width="800" heigth = "600"></div>`
   );
   instance.show();
+
+  galleryBox.addEventListener("keydown", (event) => {
+    if (event.code === "Escape") {
+      instance.close();
+    }
+  });
 }

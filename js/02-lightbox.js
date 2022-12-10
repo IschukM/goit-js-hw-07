@@ -4,7 +4,7 @@ import { galleryItems } from "./gallery-items.js";
 
 console.log(galleryItems);
 
-const gallery = document.querySelector(".gallery");
+const galleryBox = document.querySelector(".gallery");
 
 const markup = galleryItems.reduce(
   (acc, { preview, original, description }) =>
@@ -18,7 +18,12 @@ const markup = galleryItems.reduce(
   ""
 );
 
-gallery.insertAdjacentHTML("beforeend", markup);
+galleryBox.insertAdjacentHTML("beforeend", markup);
 
-let galler = new SimpleLightbox(".gallery a");
-galler.on("show.simplelightbox");
+let gallery = new SimpleLightbox(".gallery a", {
+  captions: true,
+  captionPosition: "bottom",
+  captionDelay: 250,
+  captionsData: "alt",
+});
+gallery.on("show.simplelightbox");
